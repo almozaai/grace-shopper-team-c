@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const {STRING, UUID, UUIDV4, DECIMAL} = Sequelize;
+const {STRING, UUID, UUIDV4, DataTypes} = Sequelize;
 const conn = new Sequelize(process.env.DATABASE || 'postgres://localhost/grace_shopper_db');
 
 const User = conn.define('user', {
@@ -36,7 +36,12 @@ const Product = conn.define('product', {
     type: STRING,
     allowNull: false
   },
-  price: DECIMAL
+  price: {
+    type: DataTypes.DECIMAL(10,2),
+    validate: {
+      isDecimal: true
+    }
+  }
 });
 
 Product.belongsTo(User)
@@ -56,13 +61,13 @@ const syncAndSeed = async ()=>{
       name: 'Anna Lane', email: 'bHill@gmail.com', password: '12345'
     },
     {
-      name: 'Many Taylor', email: 'bHill@gmail.com', password: '12345'
+      name: 'May Taylor', email: 'bHill@gmail.com', password: '12345'
     },
     {
       name: 'James Romero', email: 'bHill@gmail.com', password: '12345'
     }
   ]
-  const [billy, john, anna, many, james] = await Promise.all(users.map(user => User.create(user)))
+  const [billy, john, anna, may, james] = await Promise.all(users.map(user => User.create(user)))
 
 // WE CAN CHANGE IT LATER
   const products = [
@@ -74,7 +79,26 @@ const syncAndSeed = async ()=>{
     {name: 'Game Consoles', price: 300},
     {name: 'Movie', price: 13}
   ]
-  const [hammer, Silverware, paint, chair, carpet, game, movie] = await Promise.all(products.map(product => Product.create(product)))
+  const [hammer, silverware, paint, chair, carpet, game, movie] = await Promise.all(products.map(product => Product.create(product)))
+
+  return {
+    users: {
+      billy,
+      john,
+      anna,
+      may,
+      james
+    },
+    products: {
+      hammer,
+      silverware,
+      paint,
+      chair,
+      carpet,
+      game,
+      movie
+    }
+  }
 
 }
 

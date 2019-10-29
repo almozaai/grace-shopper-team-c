@@ -5,8 +5,9 @@
   "main": "db.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "test:dev": "DATABASE_URL=postgres://localhost/grace_shopper_db mocha --watch",
     "postinstall": "webpack",
-    "webpack":"webpack",
+    "webpack": "webpack",
     "webpack:dev": "webpack --watch --mode=development",
     "start:dev": "npm run webpack:dev & nodemon server.js --ignore dist/ --ignore src/",
     "start": "node server.js"
