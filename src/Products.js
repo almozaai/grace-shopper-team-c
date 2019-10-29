@@ -6,7 +6,10 @@ import { Provider, connect } from 'react-redux';
 import thunkMiddleware from "redux-thunk";
 import axios from "axios"
 
+import {addCartItem} from './store'
+
 class _Products extends Component{
+
   render(){
     return (
       <div>
@@ -17,7 +20,7 @@ class _Products extends Component{
               <br/>
               ${product.price}
               <br/>
-              <button>Add to Cart</button>
+              <button onClick={() => this.props.toCreate(product)} >Add to Cart</button>
               </div>)
           }
         </div>
@@ -28,6 +31,10 @@ class _Products extends Component{
 const Products = connect(({products})=>{
   return {
     products
+  }
+}, (dispatch)=> {
+  return {
+    toCreate: (item) => dispatch(addCartItem(item))
   }
 })(_Products);
 
