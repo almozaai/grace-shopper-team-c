@@ -10,11 +10,17 @@ class _Products extends Component{
   render(){
     return (
       <div>
-        <ul>
+        <div className='ordering' >
           {
-            this.props.products.map(product => <li key={product.id} >{product.name}</li>)
+            this.props.products.map(product => <div key={product.id} className='border' >
+              {product.name}
+              <br/>
+              ${product.price}
+              <br/>
+              <button>Add to Cart</button>
+              </div>)
           }
-        </ul>
+        </div>
       </div>
     )
   }

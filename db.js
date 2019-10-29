@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const {STRING, UUID, UUIDV4, INTEGER} = Sequelize;
+const {STRING, UUID, UUIDV4, DECIMAL} = Sequelize;
 const conn = new Sequelize(process.env.DATABASE || 'postgres://localhost/grace_shopper_db');
 
 const User = conn.define('user', {
@@ -36,7 +36,7 @@ const Product = conn.define('product', {
     type: STRING,
     allowNull: false
   },
-  Price: INTEGER
+  price: DECIMAL
 });
 
 Product.belongsTo(User)
