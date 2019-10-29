@@ -1,58 +1,31 @@
-import { render } from 'react-dom';
-import React, { Component } from 'react';
-import { HashRouter, Route, Link, Switch, Redirect, NavLink } from 'react-router-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider, connect } from 'react-redux';
-import thunkMiddleware from "redux-thunk";
-import axios from "axios"
+const express = require('express');
+const app = express();
+const db = require('./db')
+const path = require('path');
+const port = process.env.PORT || 3000;
 
-const GET_USERS = 'GET_USERS'
-const GET_PRODUCTS = 'GET_PRODUCTS'
+app.use(express.json())
+app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
-// USER REDUCER
-const userReducer = (state=[], action)=>{
-  if(action.type === GET_USERS){
-    return action.users
-  }
-  return state
-}
 
-// PRODUCT REDUCER
-const productReducer = (state=[], action)=>{
-  if(action.type === GET_PRODUCTS){
-    return action.products
-  }
-  return state
-}
+app.get('/', (req, res, next)=> {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
-//REDUCER
-const reducer = combineReducers({
-  users: userReducer,
-  products: productReducer
+//GET Route
+app.get('/api/users', (req, res, next)=>{
+  db.models.User.findAll()
+    .then(user => res.send(user))
+    .catch(next)
+})
+app.get('/api/products', (req, res, next)=> {
+  db.models.Product.findAll()
+    .then(product => res.send(product))
+    .catch(next)
 })
 
-//STORE
-const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
-//ACTION CREATORS
-const getUsers = (users) => ({type: GET_USERS, users});
-const getProducts = (products) => ({type: GET_PRODUCTS, products});
-
-//User thunks
-const getUsersThunk = ()=>{
-  return async (dispatch)=>{
-    const response = (await axios.get('/api/users')).data;
-    dispatch(getUsers(response))
-  }
-}
-
-//Product thunks
-const getProductsThunk = ()=>{
-  return async (dispatch)=>{
-    const response = (await axios.get('/api/products')).data;
-    dispatch(getProducts(response));
-  }
-}
-
-export default store;
-export {getProductsThunk, getUsersThunk}
+db.syncAndSeed()
+  .then(()=> {
+    app.listen(port, console.log(`you are listening on port ${port}`))
+  })
