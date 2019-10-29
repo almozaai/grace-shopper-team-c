@@ -44,7 +44,9 @@ const Product = conn.define('product', {
   }
 });
 
-Product.belongsTo(User)
+
+
+Product.belongsTo(User);
 User.hasMany(Product);
 
 const syncAndSeed = async ()=>{

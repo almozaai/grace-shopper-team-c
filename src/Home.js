@@ -5,10 +5,18 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import thunkMiddleware from "redux-thunk";
 import axios from "axios"
+import Products from './Products'
+import Search from './Search'
 
 const _Home = () => {
   return (
-    <h1>Home Page</h1>
+    <div>
+      <h1>Home Page</h1>
+      <div className='search'>
+      <Search />
+      </div>
+    </div>
+    
   )
 }
 

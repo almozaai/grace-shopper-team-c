@@ -12,6 +12,7 @@ import store, {getUsersThunk, getProductsThunk} from './store';
 import Users from './Users';
 import Products from './Products';
 import Home from './Home';
+import User from './User';
 
 
 class _App extends Component{
@@ -23,8 +24,10 @@ class _App extends Component{
     return (
       <HashRouter>
         <Route component={Nav} />
+        
         <Route path='/' component={Home} exact />
-        <Route path='/users' component={Users} />
+        <Route exact path='/users' component={Users} />
+        <Route path='/users/:id' component={User} />
         <Route path='/products' component={Products} />
         <Redirect to='/' />
       </HashRouter>

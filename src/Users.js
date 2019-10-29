@@ -12,7 +12,11 @@ class _Users extends Component{
       <div>
         <ul>
           {
-            this.props.users.map(user => <li key={user.id} >{user.name}</li>)
+            this.props.users.map(user => <li key={user.id} >
+              <Link to={`/users/${user.id}`}>
+              {user.name}
+              </Link>
+              </li>)
           }
         </ul>
       </div>
