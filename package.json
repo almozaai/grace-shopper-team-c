@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "webpack",
-    "webpack":"webpack",
+    "webpack": "webpack",
     "webpack:dev": "webpack --watch --mode=development",
     "start:dev": "npm run webpack:dev & nodemon server.js --ignore dist/ --ignore src/",
     "start": "node server.js"
