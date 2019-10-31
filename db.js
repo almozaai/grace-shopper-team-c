@@ -71,15 +71,15 @@ const syncAndSeed = async ()=>{
 
 // WE CAN CHANGE IT LATER
   const products = [
-    {name: 'Hammers', price: 25},
-    {name: 'Silverware', price: 19.5},
-    {name: 'Paint', price: 4.5},
+    {name: 'Hammer', price: 25.99},
+    {name: 'Nails', price: 9.50},
+    {name: 'Paint', price: 4.50},
     {name: 'Chair Set', price: 157.47},
-    {name: 'Carpet', price: 51},
-    {name: 'Game Consoles', price: 300},
-    {name: 'Movie', price: 13}
+    {name: 'Shovel', price: 15.00},
+    {name: 'Lawn Mower', price: 300.25},
+    {name: 'Wrench', price: 13.99}
   ]
-  const [hammer, silverware, paint, chair, carpet, game, movie] = await Promise.all(products.map(product => Product.create(product)))
+  const [hammer, nails, paint, chairSet, shovel, lawnMower, wrench] = await Promise.all(products.map(product => Product.create(product)))
 
   return {
     users: {
@@ -91,12 +91,12 @@ const syncAndSeed = async ()=>{
     },
     products: {
       hammer,
-      silverware,
+      nails,
       paint,
-      chair,
-      carpet,
-      game,
-      movie
+      chairSet,
+      shovel,
+      lawnMower,
+      wrench
     }
   }
 

@@ -12,7 +12,7 @@ class Cart extends Component{
           {
             cart.map(item=>
             <li key={item.id}>
-              {item.name}
+              {item.name} ${item.price}
               <button onClick={()=>destroy(item)}>Remove Item</button>
             </li>)
           }

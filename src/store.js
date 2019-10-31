@@ -51,7 +51,6 @@ const getUsers = (users) => ({type: GET_USERS, users});
 const getProducts = (products) => ({type: GET_PRODUCTS, products});
 const getCart = (cart)=> ({ type: GET_CART, cart});
 const addCartItem = (item)=> {
-  console.log(item)
   return { type: ADD_CART, item }
 };
 const deleteCartItem = (item)=> ({ type: DELETE_CART, item});
