@@ -4,7 +4,15 @@ import {deleteCartItem} from './store';
 
 class Cart extends Component{
   render(){
-    const {cart, destroy} = this.props
+    const {cart, destroy, cartTotal} = this.props
+    if (cart.length === 0) {
+      return (
+        <div>
+          <h2>Your Cart</h2>
+          <div>Your cart is empty</div>
+        </div>
+      );
+    }
     return(
       <div>
         <h2>Your Cart</h2>
@@ -17,9 +25,21 @@ class Cart extends Component{
             </li>)
           }
         </ul>
+        <h3>Subtotal ${cartTotal}</h3>
+        <button>Submit Order</button>
       </div>
     )
   }
+}
+
+const mapStateToProps = ({cart, products})=> {
+  //cartTotal maps the prices of each item in a cart and totals those prices. Note: doesn't account for tax
+  const cartTotal = cart.map(item => item.price*1).reduce((acc, curr)=> acc + curr, 0).toFixed(2);
+  return {
+    cart,
+    products,
+    cartTotal
+  };
 }
 
 const mapDispatchToProps = (dispatch)=> {
@@ -31,4 +51,4 @@ const mapDispatchToProps = (dispatch)=> {
 }
 
 
-export default connect(state=> state, mapDispatchToProps)(Cart)
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
