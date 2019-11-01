@@ -13,11 +13,13 @@ import { Provider, connect } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 import axios from "axios";
 import Search from "./Search";
+import LoginForm from "./LoginForm";
 
 const _Home = () => {
   return (
     <div>
       <h1>Home Page</h1>
+      <LoginForm />
       <Search />
     </div>
   );
