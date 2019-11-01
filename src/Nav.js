@@ -5,13 +5,15 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import thunkMiddleware from "redux-thunk";
 import axios from "axios"
+import Users from './Users';
+import { getProductsThunk } from './store';
 
-const _Nav = ({cart}) => {
+const _Nav = ({users, products, cart}) => {
   return (
     <nav>
       <NavLink to='/' >Home</NavLink>
-      <NavLink to='/users' >Users</NavLink>
-      <NavLink to='/products' >Products</NavLink>
+      <NavLink to='/users' >Users ({users.length})</NavLink>
+      <NavLink to='/products' >Products ({products.length})</NavLink>
       <NavLink to='/cart' >Cart ({cart.length})</NavLink>
     </nav>
   )

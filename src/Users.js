@@ -8,13 +8,17 @@ import axios from "axios"
 
 class _Users extends Component{
   render(){
+    console.log(this.props.users)
     return (
       <div>
-        <ul>
-          {
-            this.props.users.map(user => <li key={user.id} >{user.name}</li>)
-          }
-        </ul>
+        <div>
+          <ul>
+            {
+              this.props.users.map(user => <li key={user.id} >{user.name}</li>)
+            }
+          </ul>
+        </div>
+        <Link to='/user' ><button>Sign up</button></Link>
       </div>
     )
   }

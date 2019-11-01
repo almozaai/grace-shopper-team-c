@@ -7,6 +7,7 @@ import thunkMiddleware from "redux-thunk";
 import axios from "axios"
 
 const GET_USERS = 'GET_USERS'
+const CREATE_USERS = 'CREATE_USERS'
 const GET_PRODUCTS = 'GET_PRODUCTS'
 const GET_CART = 'GET_CART'
 const ADD_CART = 'ADD_CART'
@@ -15,6 +16,9 @@ const DELETE_CART = 'DELETE_CART'
 const userReducer = (state=[], action)=>{
   if(action.type === GET_USERS){
     return action.users
+  }
+  if(action.type === CREATE_USERS){
+    return [...state, action.user]
   }
   return state
 }
@@ -48,6 +52,7 @@ const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 //action creators
 const getUsers = (users) => ({type: GET_USERS, users});
+const createUsers = (user) => ({type: CREATE_USERS, user});
 const getProducts = (products) => ({type: GET_PRODUCTS, products});
 const getCart = (cart)=> ({ type: GET_CART, cart});
 const addCartItem = (item)=> {
@@ -62,6 +67,12 @@ const getUsersThunk = ()=>{
     dispatch(getUsers(response))
   }
 }
+const createUserThunk = (user) => {
+  return async (dispatch)=> {
+    const response = (await axios.post('/api/users', user)).data;
+    dispatch(createUsers(response));
+  }
+}
 
 //Product thunks
 const getProductsThunk = ()=>{
@@ -73,4 +84,4 @@ const getProductsThunk = ()=>{
 
 
 export default store;
-export {getProductsThunk, getUsersThunk, getCart, addCartItem, deleteCartItem}
+export {getProductsThunk, getUsersThunk, getCart, addCartItem, deleteCartItem, createUserThunk}
