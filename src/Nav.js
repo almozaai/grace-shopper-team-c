@@ -6,16 +6,16 @@ import { Provider, connect } from 'react-redux';
 import thunkMiddleware from "redux-thunk";
 import axios from "axios"
 
-const _Nav = () => {
+const _Nav = ({cart}) => {
   return (
     <nav>
       <NavLink to='/' >Home</NavLink>
       <NavLink to='/users' >Users</NavLink>
       <NavLink to='/products' >Products</NavLink>
-      <NavLink to='/cart' >Cart</NavLink>
+      <NavLink to='/cart' >Cart ({cart.length})</NavLink>
     </nav>
   )
 };
-const Nav = connect()(_Nav);
+const Nav = connect(state => state)(_Nav);
 
 export default Nav
