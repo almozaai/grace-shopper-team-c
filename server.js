@@ -24,6 +24,13 @@ app.get('/api/products', (req, res, next)=> {
     .catch(next)
 })
 
+app.post('/api/users', (req, res, next)=>{
+  db.models.User.create(req.body)
+    .then(user => res.send(user))
+    .catch(next)
+})
+
+
 
 db.syncAndSeed()
   .then(()=> {

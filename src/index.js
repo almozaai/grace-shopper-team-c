@@ -10,6 +10,7 @@ const root = document.querySelector('#root')
 import Nav from './Nav';
 import store, {getUsersThunk, getProductsThunk} from './store';
 import Users from './Users';
+import User from './signUp';
 import Products from './Products';
 import Home from './Home';
 import Cart from './Cart';
@@ -26,6 +27,7 @@ class _App extends Component{
         <Route component={Nav} />
         <Route path='/' component={Home} exact />
         <Route path='/users' component={Users} />
+        <Route path='/user' component={User} />
         <Route path='/products' component={Products} />
         <Route path='/cart' component={Cart} />
         <Redirect to='/' />
