@@ -10,7 +10,7 @@ const root = document.querySelector('#root')
 import Nav from './Nav';
 import store, {getUsersThunk, getProductsThunk} from './store';
 import Users from './Users';
-import User from './signUp';
+import User from './SignUp';
 import Products from './Products';
 import Home from './Home';
 import Cart from './Cart';
