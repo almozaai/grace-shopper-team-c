@@ -20,7 +20,7 @@ class _LoginForm extends Component {
 
   async login(ev) {
     ev.preventDefault();
-    await this.props.attemptLogin(this.state);
+    this.props.attemptLogin(this.state);
   }
 
   render() {
