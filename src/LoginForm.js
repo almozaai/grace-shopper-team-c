@@ -18,7 +18,7 @@ class _LoginForm extends Component {
     this.setState({ [ ev.target.name ]: ev.target.value });
   }
 
-  async login(ev) {
+  login(ev) {
     ev.preventDefault();
     this.props.attemptLogin(this.state);
   }

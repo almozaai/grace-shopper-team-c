@@ -5,7 +5,7 @@ import { attemptLogout } from './store';
 const _Login = ({ auth, attemptLogout }) =>
   <div>
     <div>
-    Welcome, { auth.name }
+      Welcome, { auth.name }
     </div>
     <button onClick={ attemptLogout }>Logout</button>
   </div>

@@ -12,9 +12,9 @@ class _User extends Component{
     }
     this.create = this.create.bind(this)
   }
-  async create(){
-    const theState = {name: this.state.name, email: this.state.email, password: this.state.password}
 
+  create(){
+    const theState = {name: this.state.name, email: this.state.email, password: this.state.password}
     this.props.toCreate(theState);
   }
 
