@@ -12,6 +12,14 @@ const GET_PRODUCTS = 'GET_PRODUCTS'
 const GET_CART = 'GET_CART'
 const ADD_CART = 'ADD_CART'
 const DELETE_CART = 'DELETE_CART'
+const SET_AUTH = 'SET_AUTH';
+
+const authenticateReducer = (state={}, action) => {
+  if(action.type === SET_AUTH) {
+    return action.auth
+  }
+  return state
+}
 
 const userReducer = (state=[], action)=>{
   if(action.type === GET_USERS){
@@ -45,12 +53,16 @@ const cartReducer = (state=[], action)=> {
 const reducer = combineReducers({
   users: userReducer,
   products: productReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  auth: authenticateReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 //action creators
+const setAuth = (auth) => ({ type: SET_AUTH, auth });
+const logOutAuth = () => ({ type: SET_AUTH, auth: {} });
+const keepSession = (auth) => ({ type: SET_AUTH, auth });
 const getUsers = (users) => ({type: GET_USERS, users});
 const createUsers = (user) => ({type: CREATE_USERS, user});
 const getProducts = (products) => ({type: GET_PRODUCTS, products});
@@ -59,6 +71,29 @@ const addCartItem = (item)=> {
   return { type: ADD_CART, item }
 };
 const deleteCartItem = (item)=> ({ type: DELETE_CART, item});
+
+// Auth thunks
+const attemptLogin = (user) => {
+  return async (dispatch) => {
+    const auth = (await axios.post('/api/login', { email: user.email, password: user.password })).data
+    dispatch(setAuth(auth))
+    //history.push('/')
+  }
+}
+
+const attemptLogout = () => {
+return async (dispatch) => {
+    await axios.delete('/api/logout')
+    dispatch(logOutAuth())
+  }
+}
+
+const attemptSession = () => {
+  return async (dispatch) => {
+    const auth = (await axios.get('/api/session')).data
+    dispatch(keepSession(auth))
+  }
+}
 
 //User thunks
 const getUsersThunk = ()=>{
@@ -84,4 +119,4 @@ const getProductsThunk = ()=>{
 
 
 export default store;
-export {getProductsThunk, getUsersThunk, getCart, addCartItem, deleteCartItem, createUserThunk}
+export {getProductsThunk, getUsersThunk, getCart, addCartItem, deleteCartItem, createUserThunk, attemptLogin, attemptSession, attemptLogout}

@@ -10,18 +10,22 @@ const root = document.querySelector('#root')
 import Nav from './Nav';
 import store, {getUsersThunk, getProductsThunk} from './store';
 import Users from './Users';
-import User from './signUp';
+import User from './SignUp';
 import Products from './Products';
 import Home from './Home';
 import Cart from './Cart';
+import { attemptSession } from './store';
 
 
 class _App extends Component{
   componentDidMount(){
     this.props.getUsers();
     this.props.getProducts();
+    this.props.attemptSession()
+      .catch(ex => console.log(ex))
   }
   render(){
+    const { loggedIn } = this.props;
     return (
       <HashRouter>
         <Route component={Nav} />
@@ -35,10 +39,15 @@ class _App extends Component{
     )
   }
 }
-const App = connect(null, (dispatch)=>{
+const App = connect(({ auth }) => {
+  return {
+    loggedIn: !!auth.id
+  }
+}, (dispatch)=>{
   return {
     getUsers: ()=> dispatch(getUsersThunk()),
-    getProducts: ()=> dispatch(getProductsThunk())
+    getProducts: ()=> dispatch(getProductsThunk()),
+    attemptSession: () => dispatch(attemptSession())
   }
 })(_App);
 

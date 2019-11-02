@@ -55,16 +55,16 @@ const syncAndSeed = async ()=>{
       name: 'Billy Hill', email: 'bHill@gmail.com', password: '12345'
     },
     {
-      name: 'John Ford', email: 'bHill@gmail.com', password: '12345'
+      name: 'John Ford', email: 'jFord@gmail.com', password: '12345'
     },
     {
-      name: 'Anna Lane', email: 'bHill@gmail.com', password: '12345'
+      name: 'Anna Lane', email: 'aLane@gmail.com', password: '12345'
     },
     {
-      name: 'May Taylor', email: 'bHill@gmail.com', password: '12345'
+      name: 'May Taylor', email: 'mTaylor@gmail.com', password: '12345'
     },
     {
-      name: 'James Romero', email: 'bHill@gmail.com', password: '12345'
+      name: 'James Romero', email: 'jRomero@gmail.com', password: '12345'
     }
   ]
   const [billy, john, anna, may, james] = await Promise.all(users.map(user => User.create(user)))
