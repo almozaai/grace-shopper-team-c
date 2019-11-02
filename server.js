@@ -6,7 +6,7 @@ const path = require('path');
 
 app.use(require('express-session')({
   secret: process.env.SECRET,
-  saveUninitialized: true,
+  saveUninitialized: false,
   resave: false,
 }));
 
