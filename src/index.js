@@ -1,10 +1,7 @@
 import { render } from 'react-dom';
 import React, { Component } from 'react';
-import { HashRouter, Route, Link, Switch, Redirect, NavLink } from 'react-router-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { HashRouter, Route} from 'react-router-dom';
 import { Provider, connect } from 'react-redux';
-import thunkMiddleware from "redux-thunk";
-import axios from "axios"
 const root = document.querySelector('#root')
 
 import Nav from './Nav';

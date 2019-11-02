@@ -1,10 +1,6 @@
-import { render } from 'react-dom';
 import React, { Component } from 'react';
-import { HashRouter, Route, Link, Switch, Redirect, NavLink } from 'react-router-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider, connect } from 'react-redux';
-import thunkMiddleware from "redux-thunk";
-import axios from "axios"
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import {createUserThunk} from './store'
 
