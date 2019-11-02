@@ -5,13 +5,13 @@ import { Provider, connect } from 'react-redux';
 const root = document.querySelector('#root')
 
 import Nav from './Nav';
-import store, {getUsersThunk, getProductsThunk} from './store';
+import store, {getUsersThunk, getProductsThunk} from './redux/store';
 import Users from './Users';
 import User from './SignUp';
 import Products from './Products';
 import Home from './Home';
 import Cart from './Cart';
-import { attemptSession } from './store';
+import { attemptSession } from './redux/store';
 
 
 class _App extends Component{

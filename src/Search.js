@@ -1,6 +1,6 @@
-import React from "react";
-import Products from "./Products";
-import { connect } from "react-redux";
+import React from 'react';
+import Products from './Products';
+import { connect } from 'react-redux';
 
 class _Search extends React.Component {
   constructor() {
