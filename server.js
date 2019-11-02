@@ -5,7 +5,9 @@ const { User, Product } = db.models;
 const path = require('path');
 
 app.use(require('express-session')({
-  secret: process.env.SECRET
+  secret: process.env.SECRET,
+  saveUninitialized: true,
+  resave: false,
 }));
 
 const port = process.env.PORT || 3000;
@@ -46,7 +48,7 @@ app.post('/api/login', (req, res ,next) => {
     if(!user) {
       throw({ status: 401 })
     }
-    console.log('user: ', user);
+    //console.log('user: ', user);
     req.session.user = user;
     return res.send(user);
   })
