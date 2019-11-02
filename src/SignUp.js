@@ -14,12 +14,8 @@ class _User extends Component{
   }
   async create(){
     const theState = {name: this.state.name, email: this.state.email, password: this.state.password}
-    try{
-    await this.props.toCreate(theState);
-    }
-    catch(ex){
-      alert(ex)
-    }
+
+    this.props.toCreate(theState);
   }
 
   render(){
@@ -30,7 +26,7 @@ class _User extends Component{
           <br/>
           <div>Email: <input value={this.state.email} placeholder='enter email here' onChange={ev => this.setState({email: ev.target.value})} /></div>
           <br/>
-          <div>Password: <input value={this.state.password} placeholder='enter email here' onChange={ev => this.setState({password: ev.target.value})} /></div>
+          <div>Password: <input type='password' value={this.state.password} placeholder='enter email here' onChange={ev => this.setState({password: ev.target.value})} /></div>
           <br/>
           <Link to='/users' ><button onClick={this.create} >Add User</button></Link>
         </form>
