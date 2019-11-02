@@ -1,12 +1,7 @@
-import { render } from 'react-dom';
-import React, { Component } from 'react';
-import { HashRouter, Route, Link, Switch, Redirect, NavLink } from 'react-router-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider, connect } from 'react-redux';
-import thunkMiddleware from "redux-thunk";
-import axios from "axios"
-import Users from './Users';
-import { getProductsThunk } from './store';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 
 const _Nav = ({users, products, cart}) => {
   return (

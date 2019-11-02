@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const {STRING, UUID, UUIDV4, DataTypes} = Sequelize;
-const conn = new Sequelize(process.env.DATABASE || 'postgres://localhost/grace_shopper_db');
+const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/grace_shopper_db');
 
 const User = conn.define('user', {
   id: {
