@@ -34,7 +34,6 @@ class _App extends Component{
         <Route path='/user' component={User} />
         <Route path='/products' component={Products} />
         <Route path='/cart' component={Cart} />
-        <Redirect to='/' />
       </HashRouter>
     )
   }
