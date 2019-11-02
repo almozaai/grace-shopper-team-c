@@ -9,8 +9,8 @@
     "postinstall": "npm run webpack",
     "webpack": "webpack",
     "webpack:dev": "webpack --watch --mode=development",
-    "start:dev": "npm run webpack:dev & SECRET=FOO nodemon server.js --ignore dist/ --ignore src/",
-    "start": "node server.js"
+    "start:dev": "npm run webpack:dev & SECRET=FOO nodemon ./server/index.js --ignore dist/ --ignore src/",
+    "start": "node ./server/index.js"
   },
   "babel": {
     "presets": [

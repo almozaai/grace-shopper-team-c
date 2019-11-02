@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {deleteCartItem} from './store';
+import {deleteCartItem} from './redux/store';
 
 class Cart extends Component{
   render(){

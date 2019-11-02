@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {createUserThunk} from './store'
+import {createUserThunk} from './redux/store'
 
 class _User extends Component{
   constructor(){

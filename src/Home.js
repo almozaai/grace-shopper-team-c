@@ -1,8 +1,8 @@
 
-import React from "react";
-import { connect } from "react-redux";
-import Search from "./Search";
-import LoginForm from "./LoginForm";
+import React from 'react';
+import { connect } from 'react-redux';
+import Search from './Search';
+import LoginForm from './LoginForm';
 import Login from './Login';
 
 const _Home = ({ auth }) => {
