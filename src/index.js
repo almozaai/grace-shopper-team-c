@@ -14,14 +14,18 @@ import User from './SignUp';
 import Products from './Products';
 import Home from './Home';
 import Cart from './Cart';
+import { attemptSession } from './store';
 
 
 class _App extends Component{
   componentDidMount(){
     this.props.getUsers();
     this.props.getProducts();
+    this.props.attemptSession()
+      .catch(ex => console.log(ex))
   }
   render(){
+    const { loggedIn } = this.props;
     return (
       <HashRouter>
         <Route component={Nav} />
@@ -35,10 +39,15 @@ class _App extends Component{
     )
   }
 }
-const App = connect(null, (dispatch)=>{
+const App = connect(({ auth }) => {
+  return {
+    loggedIn: !!auth.id
+  }
+}, (dispatch)=>{
   return {
     getUsers: ()=> dispatch(getUsersThunk()),
-    getProducts: ()=> dispatch(getProductsThunk())
+    getProducts: ()=> dispatch(getProductsThunk()),
+    attemptSession: () => dispatch(attemptSession())
   }
 })(_App);
 

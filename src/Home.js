@@ -14,17 +14,22 @@ import thunkMiddleware from "redux-thunk";
 import axios from "axios";
 import Search from "./Search";
 import LoginForm from "./LoginForm";
+import Login from './Login';
 
-const _Home = () => {
+const _Home = ({ auth }) => {
   return (
     <div>
       <h1>Home Page</h1>
-      <LoginForm />
+      {
+        !auth.id ? <LoginForm /> : <Login />
+      }
       <Search />
     </div>
   );
 };
 
-const Home = connect()(_Home);
+const Home = connect(({ auth }) => {
+  return { auth }
+})(_Home);
 
 export default Home;
