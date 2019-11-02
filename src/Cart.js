@@ -18,10 +18,10 @@ class Cart extends Component{
         <h2>Your Cart</h2>
         <ul>
           {
-            cart.map(item=>
-            <li key={item.id}>
+            cart.map((item, idx)=>
+            <li key={idx}>
               {item.name} ${item.price}
-              <button onClick={()=>destroy(item)}>Remove Item</button>
+              <button onClick={()=> destroy(idx)}>Remove Item</button>
             </li>)
           }
         </ul>
@@ -44,8 +44,8 @@ const mapStateToProps = ({cart, products})=> {
 
 const mapDispatchToProps = (dispatch)=> {
    return {
-     destroy: (item)=>{
-       return dispatch(deleteCartItem(item))
+     destroy: (idx)=>{
+       return dispatch(deleteCartItem(idx))
      }
   }
 }

@@ -45,7 +45,7 @@ const cartReducer = (state=[], action)=> {
     case ADD_CART :
       return [...state, action.item];
     case DELETE_CART :
-      return state.filter( item => item.id !== action.item.id);
+      return state.filter((item, idx) => idx !== action.idx);
     default: return state;
   }
 }
@@ -70,7 +70,7 @@ const getCart = (cart)=> ({ type: GET_CART, cart});
 const addCartItem = (item)=> {
   return { type: ADD_CART, item }
 };
-const deleteCartItem = (item)=> ({ type: DELETE_CART, item});
+const deleteCartItem = (idx)=> ({ type: DELETE_CART, idx});
 
 // Auth thunks
 const attemptLogin = (user) => {
