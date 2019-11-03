@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import {createUserThunk} from './redux/store'
+import {createUserThunk} from '../redux/store'
 
 class _SignUp extends Component{
   constructor(){

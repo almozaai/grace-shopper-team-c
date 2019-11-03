@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import { attemptLogout } from './redux/store';
+import { attemptLogout } from '../redux/store';
 
 class _UserProfile extends Component {
   render(){
