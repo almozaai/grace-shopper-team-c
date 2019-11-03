@@ -25,6 +25,14 @@ router.post('/api/users', (req, res, next)=>{
     .then(user => res.send(user))
     .catch(next)
 })
+// Update a user
+router.put('/api/users/:id', async(req, res, next)=> {
+  const user = await User.findByPk(req.session.user.id);
+
+  user.update(req.body)
+    .then( updatedUser => res.status(200).send(updatedUser))
+    .catch(next);
+})
 
 // Login
 router.post('/api/login', (req, res ,next) => {
@@ -36,7 +44,6 @@ router.post('/api/login', (req, res ,next) => {
     if(!user) {
       throw({ status: 401 })
     }
-    //console.log('user: ', user);
     req.session.user = user;
     return res.send(user);
   })
