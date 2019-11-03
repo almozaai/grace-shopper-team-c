@@ -12,12 +12,12 @@ app.use(require('express-session')({
   resave: false,
 }));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
+app.use('/public', express.static(path.join(__dirname, '../public')));
 app.use('/', routes);
+
 app.get('/', (req, res, next)=> {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
-
-
 
 db.syncAndSeed()
   .then(()=> {
