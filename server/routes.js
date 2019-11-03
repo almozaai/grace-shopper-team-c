@@ -21,7 +21,11 @@ router.get('/api/products', (req, res, next)=> {
 
 // Create a user
 router.post('/api/users', (req, res, next)=>{
-  User.create(req.body)
+  User.create({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+  })
     .then(user => res.send(user))
     .catch(next)
 })
@@ -29,7 +33,11 @@ router.post('/api/users', (req, res, next)=>{
 router.put('/api/users/:id', async(req, res, next)=> {
   const user = await User.findByPk(req.session.user.id);
 
-  user.update(req.body)
+  user.update({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  })
     .then( updatedUser => res.status(200).send(updatedUser))
     .catch(next);
 })
