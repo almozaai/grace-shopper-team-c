@@ -5,40 +5,34 @@ import { attemptLogout } from '../redux/store';
 
 class _UserProfile extends Component {
   render(){
-    const { users, auth, logout } = this.props;
+    const { auth, logout } = this.props;
 
-    if(users.length === 0){
-      return (
-        <div className='userProfileContainer'>
-          <h1>Account Information</h1>
-          <h3>Loading...</h3>
-        </div>
-      );
-    }
-
-    const user = users.find(user=> user.id === auth.id);
-
-    //if guest tries to access /profile, redirect to home page
+    //if guest tries to access /profile, link to home page
     if(!auth.id){
       return (
-        <Redirect to='/' />
+        <div>
+          <h3>Hello guest,</h3>
+          <Link to='/'>Return Home</Link>
+        </div>
       );
     }
 
     return (
       <div className='userProfileContainer'>
         <h1>Account Information</h1>
-        <h3>Name: {user.name} </h3>
-        <h3>Email: {user.email} </h3>
+        <h3>Name: {auth.name} </h3>
+        <h3>Email: {auth.email} </h3>
         <div><Link to='/settings/profile'>Edit profile</Link></div>
         <br></br>
-        <button onClick={logout}>Logout</button>
+        <button onClick={logout}><Link to='/'>Logout</Link></button>
+        <br></br><br></br>
+        <div><Link to='/settings/deactivate'>Deactivate Account</Link></div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ users, auth })=> ({ users, auth });
+const mapStateToProps = ({ auth })=> ({ auth });
 
 const mapDispatchToProps = (dispatch)=> {
   return {

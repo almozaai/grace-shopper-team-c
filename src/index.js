@@ -10,6 +10,7 @@ import Users from './Components/Users';
 import SignUp from './Components/SignUp';
 import UserProfile from './Components/UserProfile';
 import UpdateUserForm from './Components/UpdateUserForm';
+import DeleteUser from './Components/DeleteUser';
 import Products from './Components/Products';
 import Home from './Components/Home';
 import Cart from './Components/Cart';
@@ -32,7 +33,8 @@ class _App extends Component{
         <Route path='/users' component={Users} />
         <Route path='/signup' component={SignUp} />
         <Route path='/profile' component={UserProfile} />
-        <Route path='/settings/profile' component={UpdateUserForm} />
+        <Route path='/settings/profile' component={UpdateUserForm} exact/>
+        <Route path='/settings/deactivate' component={DeleteUser} exact/>
         <Route path='/products' component={Products} />
         <Route path='/cart' component={Cart} />
       </HashRouter>
