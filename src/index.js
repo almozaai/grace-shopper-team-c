@@ -4,15 +4,15 @@ import { HashRouter, Route} from 'react-router-dom';
 import { Provider, connect } from 'react-redux';
 const root = document.querySelector('#root')
 
-import Nav from './Nav';
+import Nav from './Components/Nav';
 import store, {getUsersThunk, getProductsThunk} from './redux/store';
-import Users from './Users';
-import SignUp from './SignUp';
-import UserProfile from './UserProfile';
-import UpdateUserForm from './UpdateUserForm';
-import Products from './Products';
-import Home from './Home';
-import Cart from './Cart';
+import Users from './Components/Users';
+import SignUp from './Components/SignUp';
+import UserProfile from './Components/UserProfile';
+import UpdateUserForm from './Components/UpdateUserForm';
+import Products from './Components/Products';
+import Home from './Components/Home';
+import Cart from './Components/Cart';
 import { attemptSession } from './redux/store';
 
 

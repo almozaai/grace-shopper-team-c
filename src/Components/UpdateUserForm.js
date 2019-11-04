@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateUserThunk } from './redux/thunk';
+import { updateUserThunk } from '../redux/thunk';
 
 
 class _UpdateUserForm extends Component {

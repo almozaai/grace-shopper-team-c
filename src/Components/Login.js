@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { attemptLogout } from './redux/store';
+import { attemptLogout } from '../redux/store';
 
 const _Login = ({ auth, attemptLogout }) =>
   <div>
