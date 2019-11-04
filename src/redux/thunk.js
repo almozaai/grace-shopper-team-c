@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { setAuth, logOutAuth, keepSession, getUsers, createUsers, getProducts, updateUser } from './action.js'
+import { setAuth, logOutAuth, keepSession, getUsers, createUsers, getProducts, updateUser, deleteUser } from './action.js'
 
 
 // Auth thunks
@@ -50,6 +50,17 @@ const updateUserThunk = (user)=> {
     }
   }
 }
+const deleteUserThunk = (user)=> {
+  return async(dispatch)=> {
+    try {
+      await axios.delete(`/api/users/${user.id}`, user);
+      dispatch(deleteUser(user));
+    }
+    catch(ex){
+      console.log(ex);
+    }
+  }
+}
 
 //Product thunks
 const getProductsThunk = ()=>{
@@ -59,4 +70,4 @@ const getProductsThunk = ()=>{
   }
 }
 
-export {getProductsThunk, getUsersThunk, createUserThunk, updateUserThunk, attemptLogin, attemptSession, attemptLogout}
+export {getProductsThunk, getUsersThunk, createUserThunk, updateUserThunk, deleteUserThunk, attemptLogin, attemptSession, attemptLogout}

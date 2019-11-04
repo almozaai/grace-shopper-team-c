@@ -1,6 +1,6 @@
 import {  combineReducers, } from 'redux';
 
-import { SET_AUTH, GET_USERS, GET_PRODUCTS, GET_CART, ADD_CART, DELETE_CART, CREATE_USERS, UPDATE_USER } from './action.js'
+import { SET_AUTH, GET_USERS, GET_PRODUCTS, GET_CART, ADD_CART, DELETE_CART, CREATE_USERS, UPDATE_USER, DELETE_USER } from './action.js'
 
 
 const authenticateReducer = (state={}, action) => {
@@ -18,6 +18,8 @@ const userReducer = (state=[], action)=>{
       return [...state, action.user];
     case UPDATE_USER :
       return state.map( user => user.id === action.user.id ? action.user : user );
+    case DELETE_USER :
+      return state.filter( user => user.id !== action.user.id);
     default: return state;
   }
 }
