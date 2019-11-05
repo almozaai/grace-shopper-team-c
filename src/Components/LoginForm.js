@@ -7,7 +7,8 @@ class _LoginForm extends Component {
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error: ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -20,17 +21,23 @@ class _LoginForm extends Component {
 
   login(ev) {
     ev.preventDefault();
-    this.props.attemptLogin(this.state);
+    const credentials = {...this.state};
+    delete credentials.error;
+    this.props.attemptLogin(this.state)
+      .catch(ex => this.setState({error: 'Need a valid email and password!'}))
   }
 
   render() {
-    const { email, password } = this.state;
+    const { error, email, password } = this.state;
     const { onChange, login } = this;
 
     return (
       <div>
         <h3>Login</h3>
         <form onSubmit={ login }>
+          {
+            !!error && <div className='error' >{error}</div>
+          }
           <div>
           <input placeholder='email' value={ email } type='email' name='email' onChange={ onChange } />
           </div>
