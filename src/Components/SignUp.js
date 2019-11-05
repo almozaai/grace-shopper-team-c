@@ -7,9 +7,6 @@ class _SignUp extends Component{
   constructor(){
     super();
     this.state = {
-      name: '',
-      email: '',
-      password: '',
       error: ''
     }
     this.create = this.create.bind(this)
@@ -17,7 +14,14 @@ class _SignUp extends Component{
 
   create(){
     const theState = {name: this.state.name, email: this.state.email, password: this.state.password}
+    try{
+      if(!theState.email.includes('@')){
+        throw 'ERROR: Must be a valid email with an @'
+      }
     this.props.toCreate(theState);
+    }catch(ex){
+      alert(ex)
+    }
   }
 
   render(){
@@ -39,7 +43,7 @@ class _SignUp extends Component{
           <br/>
           <div>Password: <input type='password' value={this.state.password} placeholder='enter email here' onChange={ev => this.setState({password: ev.target.value})} /></div>
           <br/>
-          <Link to='/' ><button onClick={this.create} >Sign Up</button></Link>
+          <Link to='/' ><button disabled={!this.state.name || !this.state.email || !this.state.password } onClick={this.create} >Sign Up</button></Link>
         </form>
       </div>
     )
