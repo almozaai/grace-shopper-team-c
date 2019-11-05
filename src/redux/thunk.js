@@ -86,38 +86,34 @@ const updateOrderThunk = order => {
   };
 };
 
-const deleteOrder = order => {
-  return async dispatch =>{
+const deleteOrderThunk = order => {
+  return async dispatch => {
     const response = (await axios.delete(`api/orders/${order.id}`)).data;
-      dispatch(deleteOrder(response))
-  }
-}
+    dispatch(deleteOrder(response));
+  };
+};
 
 //LineItem thunk
-  const getCartThunk = () => {
-    return async dispatch => {
-      const response = (await axios.get('/api/carts')).data;
-      dispatch(getCart(response))
-    }
-  }
+const getCartThunk = () => {
+  return async dispatch => {
+    const response = (await axios.get('/api/carts')).data;
+    dispatch(getCart(response));
+  };
+};
 
-  const addCartItemThunk = (item) => {
-    return async dispatch => {
-      const response = (await axios.post('/api/carts'), item).data
-      dispatch(addCartItem(response))
-    }
-  }
+const addCartItemThunk = item => {
+  return async dispatch => {
+    const response = (await axios.post('/api/carts'), item).data;
+    dispatch(addCartItem(response));
+  };
+};
 
-  const deleteCartItemThunk = item => {
-    return async dispatch => {
-      const response = (await axios.delete(`api/carts/${item.id}`)).data;
-      dispatch(deleteCartItem(response))
-    }
-  }
-  addCartItem,
-  deleteCartItem
-
-const 
+const deleteCartItemThunk = item => {
+  return async dispatch => {
+    const response = (await axios.delete(`api/carts/${item.id}`)).data;
+    dispatch(deleteCartItem(response));
+  };
+};
 
 export {
   getProductsThunk,
@@ -129,7 +125,7 @@ export {
   getOrdersThunk,
   createOrderThunk,
   updateOrderThunk,
-  deleteOrder,
+  deleteOrderThunk,
   getCartThunk,
   addCartItemThunk,
   deleteCartItemThunk
