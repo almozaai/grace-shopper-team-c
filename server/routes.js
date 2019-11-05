@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db')
-const { User, Product } = db.models;
+const { User, Product, Order, LineItem } = db.models;
 
 
 
@@ -9,7 +9,8 @@ router.use(express.json())
 
 //GET Route
 router.get('/api/users', (req, res, next)=>{
-  User.findAll()
+  User.findAll({
+    include: [{model: Order, include: [LineItem]}]})
     .then(user => res.send(user))
     .catch(next)
 })
