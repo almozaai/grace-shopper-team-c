@@ -86,7 +86,7 @@ const updateOrderThunk = order => {
   };
 };
 
-const deleteOrder = order => {
+const deleteOrderThunk = order => {
   return async dispatch =>{
     const response = (await axios.delete(`api/orders/${order.id}`)).data;
       dispatch(deleteOrder(response))
@@ -114,10 +114,7 @@ const deleteOrder = order => {
       dispatch(deleteCartItem(response))
     }
   }
-  addCartItem,
-  deleteCartItem
 
-const 
 
 export {
   getProductsThunk,
@@ -129,7 +126,7 @@ export {
   getOrdersThunk,
   createOrderThunk,
   updateOrderThunk,
-  deleteOrder,
+  deleteOrderThunk,
   getCartThunk,
   addCartItemThunk,
   deleteCartItemThunk

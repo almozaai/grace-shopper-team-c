@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { STRING, UUID, UUIDV4, DataTypes, BOOLEAN } = Sequelize;
+const { STRING, UUID, UUIDV4, DataTypes, BOOLEAN, INTEGER } = Sequelize;
 const conn = new Sequelize(
   process.env.DATABASE_URL || 'postgres://localhost/grace_shopper_db'
 );
