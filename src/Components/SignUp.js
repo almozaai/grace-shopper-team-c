@@ -7,6 +7,9 @@ class _SignUp extends Component{
   constructor(){
     super();
     this.state = {
+      name: '',
+      email: '',
+      password: '',
       error: ''
     }
     this.create = this.create.bind(this)
