@@ -10,7 +10,7 @@ import {
   CREATE_USERS,
   UPDATE_USER,
   DELETE_USER,
-  GET_ORDERS,
+  GET_ORDER,
   CREATE_ORDER,
   UPDATE_ORDER,
   DELETE_ORDER
@@ -62,7 +62,7 @@ const cartReducer = (state = [], action) => {
 
 const orderReducer = (state = [], action) => {
   switch (action.type) {
-    case GET_ORDERS:
+    case GET_ORDER:
       return action.orders;
     case CREATE_ORDER:
       return [...state, acion.order];

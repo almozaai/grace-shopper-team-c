@@ -43,6 +43,11 @@ const Product = conn.define('product', {
     validate: {
       isDecimal: true
     }
+  },
+  stock: {
+    type: INTEGER,
+    allowNull: false,
+    defaultValue: 0
   }
 });
 
@@ -111,13 +116,13 @@ const syncAndSeed = async () => {
   );
 
   const products = [
-    { name: 'Hammer', price: 25.99 },
-    { name: 'Nails', price: 9.5 },
-    { name: 'Paint', price: 4.5 },
-    { name: 'Chair Set', price: 157.47 },
-    { name: 'Shovel', price: 15.0 },
-    { name: 'Lawn Mower', price: 300.25 },
-    { name: 'Wrench', price: 13.99 }
+    { name: 'Hammer', stock: 200, price: 25.99 },
+    { name: 'Nails', stock: 200, price: 9.5 },
+    { name: 'Paint', stock: 200, price: 4.5 },
+    { name: 'Chair Set', stock: 200, price: 157.47 },
+    { name: 'Shovel', stock: 200, price: 15.0 },
+    { name: 'Lawn Mower', stock: 200, price: 300.25 },
+    { name: 'Wrench', stock: 200, price: 13.99 }
   ];
   const [
     hammer,
@@ -128,6 +133,27 @@ const syncAndSeed = async () => {
     lawnMower,
     wrench
   ] = await Promise.all(products.map(product => Product.create(product)));
+
+  const orders = [
+    { complete: true, userId: anna.id },
+    { complete: true, userId: may.id },
+    { complete: true, userId: john.id }
+  ];
+
+  const [order1, order2, order3] = await Promise.all(
+    orders.map(order => Order.create(order))
+  );
+
+  const lineItems = [
+    { quantity: 6, productId: hammer.id, orderId: order1.id },
+    { quantity: 6, productId: shovel.id, orderId: order2.id },
+    { quantity: 16, productId: nails.id, orderId: order2.id },
+    { quantity: 3, productId: paint.id, orderId: order3.id }
+  ];
+
+  const [item1, item2, item3, item4] = await Promise.all(
+    lineItems.map(item => LineItem.create(item))
+  );
 
   return {
     users: {
@@ -145,6 +171,17 @@ const syncAndSeed = async () => {
       shovel,
       lawnMower,
       wrench
+    },
+    orders: {
+      order1,
+      order2,
+      order3
+    },
+    lineitems: {
+      item1,
+      item2,
+      item3,
+      item4
     }
   };
 };
