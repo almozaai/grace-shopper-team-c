@@ -192,6 +192,8 @@ module.exports = {
   syncAndSeed,
   models: {
     User,
-    Product
+    Product,
+    Order,
+    LineItem
   }
 };

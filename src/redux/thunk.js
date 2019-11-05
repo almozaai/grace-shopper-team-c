@@ -104,8 +104,8 @@ const createOrderThunk = order => {
 
 const updateOrderThunk = order => {
   return async dispatch => {
-    const resopnse = (await axios.put(`/api/orders/${order.id}`, order)).data;
-    dispatch(updateOrder(resopnse));
+    const response = (await axios.put(`/api/orders/${order.id}`, order)).data;
+    dispatch(updateOrder(response));
   };
 };
 
