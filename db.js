@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
-const {STRING, UUID, UUIDV4, DataTypes} = Sequelize;
-const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/grace_shopper_db');
+const { STRING, UUID, UUIDV4, DataTypes, BOOLEAN } = Sequelize;
+const conn = new Sequelize(
+  process.env.DATABASE_URL || 'postgres://localhost/grace_shopper_db'
+);
 
 const User = conn.define('user', {
   id: {
@@ -24,7 +26,7 @@ const User = conn.define('user', {
     type: STRING,
     allowNull: false
   }
-})
+});
 
 const Product = conn.define('product', {
   id: {
@@ -37,48 +39,95 @@ const Product = conn.define('product', {
     allowNull: false
   },
   price: {
-    type: DataTypes.DECIMAL(10,2),
+    type: DataTypes.DECIMAL(10, 2),
     validate: {
       isDecimal: true
     }
   }
 });
 
-Product.belongsTo(User)
-User.hasMany(Product);
+const Order = conn.define('order', {
+  id: {
+    primaryKey: true,
+    type: UUID,
+    defaultValue: UUIDV4
+  },
+  complete: {
+    type: BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  }
+});
 
-const syncAndSeed = async ()=>{
-  await conn.sync({force: true});
+const LineItem = conn.define('lineItem', {
+  quantity: {
+    type: INTEGER,
+    allowNull: false,
+    defaultValue: 1
+  }
+});
+
+Order.belongsTo(User);
+User.hasMany(Order);
+
+LineItem.belongsTo(Order);
+Order.hasMany(LineItem);
+
+LineItem.belongsTo(Product);
+Product.hasMany(LineItem);
+
+const syncAndSeed = async () => {
+  await conn.sync({ force: true });
 
   const users = [
     {
-      name: 'Billy Hill', email: 'bHill@gmail.com', password: '12345'
+      name: 'Billy Hill',
+      email: 'bHill@gmail.com',
+      password: '12345'
     },
     {
-      name: 'John Ford', email: 'jFord@gmail.com', password: '12345'
+      name: 'John Ford',
+      email: 'jFord@gmail.com',
+      password: '12345'
     },
     {
-      name: 'Anna Lane', email: 'aLane@gmail.com', password: '12345'
+      name: 'Anna Lane',
+      email: 'aLane@gmail.com',
+      password: '12345'
     },
     {
-      name: 'May Taylor', email: 'mTaylor@gmail.com', password: '12345'
+      name: 'May Taylor',
+      email: 'mTaylor@gmail.com',
+      password: '12345'
     },
     {
-      name: 'James Romero', email: 'jRomero@gmail.com', password: '12345'
+      name: 'James Romero',
+      email: 'jRomero@gmail.com',
+      password: '12345'
     }
-  ]
-  const [billy, john, anna, may, james] = await Promise.all(users.map(user => User.create(user)))
+  ];
+  const [billy, john, anna, may, james] = await Promise.all(
+    users.map(user => User.create(user))
+  );
 
   const products = [
-    {name: 'Hammer', price: 25.99},
-    {name: 'Nails', price: 9.50},
-    {name: 'Paint', price: 4.50},
-    {name: 'Chair Set', price: 157.47},
-    {name: 'Shovel', price: 15.00},
-    {name: 'Lawn Mower', price: 300.25},
-    {name: 'Wrench', price: 13.99}
-  ]
-  const [hammer, nails, paint, chairSet, shovel, lawnMower, wrench] = await Promise.all(products.map(product => Product.create(product)))
+    { name: 'Hammer', price: 25.99 },
+    { name: 'Nails', price: 9.5 },
+    { name: 'Paint', price: 4.5 },
+    { name: 'Chair Set', price: 157.47 },
+    { name: 'Shovel', price: 15.0 },
+    { name: 'Lawn Mower', price: 300.25 },
+    { name: 'Wrench', price: 13.99 }
+  ];
+  const [
+    hammer,
+    nails,
+    paint,
+    chairSet,
+    shovel,
+    lawnMower,
+    wrench
+  ] = await Promise.all(products.map(product => Product.create(product)));
 
   return {
     users: {
@@ -97,9 +146,8 @@ const syncAndSeed = async ()=>{
       lawnMower,
       wrench
     }
-  }
-
-}
+  };
+};
 
 // syncAndSeed();
 
@@ -109,4 +157,4 @@ module.exports = {
     User,
     Product
   }
-}
+};
