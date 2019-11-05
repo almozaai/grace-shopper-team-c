@@ -6,6 +6,7 @@ import {
   keepSession,
   getUsers,
   createUsers,
+  deleteUser,
   getProducts,
   getOrders,
   createOrder,
@@ -55,6 +56,28 @@ const createUserThunk = user => {
     dispatch(createUsers(response));
   };
 };
+const updateUserThunk = (user)=> {
+  return async (dispatch)=> {
+    try {
+      const updatedUser = (await axios.put(`/api/users/${user.id}`, user)).data;
+      dispatch(updateUser(updatedUser));
+    }
+    catch(ex) {
+      console.log(ex);
+    }
+  }
+}
+const deleteUserThunk = (user)=> {
+  return async(dispatch)=> {
+    try {
+      await axios.delete(`/api/users/${user.id}`, user);
+      dispatch(deleteUser(user));
+    }
+    catch(ex){
+      console.log(ex);
+    }
+  }
+}
 
 //Product thunks
 const getProductsThunk = () => {
@@ -120,6 +143,8 @@ export {
   getProductsThunk,
   getUsersThunk,
   createUserThunk,
+  updateUserThunk,
+  deleteUserThunk,
   attemptLogin,
   attemptSession,
   attemptLogout,
