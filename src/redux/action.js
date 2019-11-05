@@ -2,6 +2,7 @@
 const GET_USERS = 'GET_USERS'
 const CREATE_USERS = 'CREATE_USERS'
 const UPDATE_USER = 'UPDATE_USER'
+const DELETE_USER = 'DELETE_USER'
 const GET_PRODUCTS = 'GET_PRODUCTS'
 const GET_CART = 'GET_CART'
 const ADD_CART = 'ADD_CART'
@@ -21,6 +22,7 @@ const keepSession = (auth) => ({ type: SET_AUTH, auth });
 const getUsers = (users) => ({type: GET_USERS, users});
 const createUsers = (user) => ({type: CREATE_USERS, user});
 const updateUser = (user)=> ({type: UPDATE_USER, user});
+const deleteUser = (user)=> ({type: DELETE_USER, user});
 
 //products
 const getProducts = (products) => ({type: GET_PRODUCTS, products});
@@ -32,4 +34,4 @@ const addCartItem = (item)=> {
 };
 const deleteCartItem = (idx)=> ({ type: DELETE_CART, idx});
 
-export { getCart, addCartItem, deleteCartItem, setAuth, logOutAuth, keepSession, getUsers, createUsers, updateUser, getProducts, SET_AUTH, GET_USERS, GET_PRODUCTS, GET_CART, ADD_CART, DELETE_CART, CREATE_USERS, UPDATE_USER}
+export { getCart, addCartItem, deleteCartItem, setAuth, logOutAuth, keepSession, getUsers, createUsers, updateUser, deleteUser, getProducts, SET_AUTH, GET_USERS, GET_PRODUCTS, GET_CART, ADD_CART, DELETE_CART, CREATE_USERS, UPDATE_USER, DELETE_USER }

@@ -19,7 +19,7 @@ router.get('/api/products', (req, res, next)=> {
     .catch(next)
 })
 
-// Create a user
+// Create a User
 router.post('/api/users', (req, res, next)=>{
   User.create({
     name: req.body.name,
@@ -29,7 +29,7 @@ router.post('/api/users', (req, res, next)=>{
     .then(user => res.send(user))
     .catch(next)
 })
-// Update a user
+// Update a User
 router.put('/api/users/:id', async(req, res, next)=> {
   const user = await User.findByPk(req.session.user.id);
 
@@ -39,6 +39,13 @@ router.put('/api/users/:id', async(req, res, next)=> {
     password: req.body.password
   })
     .then( updatedUser => res.status(200).send(updatedUser))
+    .catch(next);
+})
+// Delete a User
+router.delete('/api/users/:id', (req, res, next)=> {
+  User.findByPk(req.params.id)
+    .then( user => user.destroy())
+    .then( ()=> res.sendStatus(204))
     .catch(next);
 })
 
