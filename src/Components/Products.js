@@ -6,14 +6,37 @@ import { addCartItemThunk, createOrderThunk } from '../redux/store';
 class _Products extends Component {
   async create(e, product) {
     e.preventDefault();
-
-    const checkOrder = this.props.orders.filter(order => {
-      return this.props.cart.find(item => item.orderId == order.id);
-    });
-    if (!checkOrder.length) {
-      this.props.creteOrder({ userId: this.props.auth.id });
-    } else {
-      await this.props.toCreate({ productId: product.id, orderId: order.id });
+    console.log(this.props.cart, this.props.orders);
+    if (this.props.auth) {
+      const checkOrder = this.props.orders.filter(
+        order => order.userId === this.props.auth.id
+      );
+      console.log('checkOrder', checkOrder);
+      if (!checkOrder.length) {
+        await this.props.creteOrder({ userId: this.props.auth.id });
+        const order = this.props.orders.filter(
+          order => order.userId === this.props.auth.id
+        );
+        console.log(order[0].id);
+        await this.props.toCreate({
+          productId: product.id,
+          orderId: order[0].id
+        });
+      } else {
+        console.log(
+          'with item',
+          this.props.orders.filter(
+            order => order.userId === this.props.auth.id
+          )[0].id,
+          product.id
+        );
+        await this.props.toCreate({
+          productId: product.id,
+          orderId: this.props.orders.filter(
+            order => order.userId === this.props.auth.id
+          )[0].id
+        });
+      }
     }
   }
   render() {

@@ -52,7 +52,7 @@ const productReducer = (state = [], action) => {
 const cartReducer = (state = [], action) => {
   switch (action.type) {
     case GET_CART:
-      return action.cart;
+      return action.items;
     case ADD_CART:
       return [...state, action.item];
     case DELETE_CART:

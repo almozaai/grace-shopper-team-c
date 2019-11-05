@@ -29,7 +29,7 @@ const deleteUser = user => ({ type: DELETE_USER, user });
 const getProducts = products => ({ type: GET_PRODUCTS, products });
 
 //cart
-const getCart = cart => ({ type: GET_CART, cart });
+const getCart = items => ({ type: GET_CART, items });
 const addCartItem = item => {
   return { type: ADD_CART, item };
 };
