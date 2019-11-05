@@ -10,11 +10,13 @@ import {
   CREATE_USERS,
   UPDATE_USER,
   DELETE_USER,
-  GET_ORDER,
+  GET_ORDERS,
   CREATE_ORDER,
   UPDATE_ORDER,
   DELETE_ORDER
 } from './action.js';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const authenticateReducer = (state = {}, action) => {
   if (action.type === SET_AUTH) {
@@ -62,10 +64,10 @@ const cartReducer = (state = [], action) => {
 
 const orderReducer = (state = [], action) => {
   switch (action.type) {
-    case GET_ORDER:
+    case GET_ORDERS:
       return action.orders;
     case CREATE_ORDER:
-      return [...state, acion.order];
+      return [...state, action.order];
     case UPDATE_ORDER:
       return state.map(order =>
         order.id === action.order.id ? action.order : order
@@ -82,7 +84,7 @@ const reducer = combineReducers({
   products: productReducer,
   cart: cartReducer,
   auth: authenticateReducer,
-  order: orderReducer
+  orders: orderReducer
 });
 
-export { reducer };
+export { reducer, composeEnhancers };

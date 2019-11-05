@@ -6,6 +6,7 @@ import {
   keepSession,
   getUsers,
   createUsers,
+  deleteUser,
   getProducts,
   getOrders,
   createOrder,
@@ -55,6 +56,26 @@ const createUserThunk = user => {
     dispatch(createUsers(response));
   };
 };
+const updateUserThunk = user => {
+  return async dispatch => {
+    try {
+      const updatedUser = (await axios.put(`/api/users/${user.id}`, user)).data;
+      dispatch(updateUser(updatedUser));
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+};
+const deleteUserThunk = user => {
+  return async dispatch => {
+    try {
+      await axios.delete(`/api/users/${user.id}`, user);
+      dispatch(deleteUser(user));
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+};
 
 //Product thunks
 const getProductsThunk = () => {
@@ -75,51 +96,54 @@ const getOrdersThunk = () => {
 const createOrderThunk = order => {
   return async dispatch => {
     const response = (await axios.post('/api/orders', order)).data;
+    console.log(order);
     dispatch(createOrder(response));
   };
 };
 
 const updateOrderThunk = order => {
   return async dispatch => {
-    const resopnse = (await axios.put(`/api/orders/${order.id}`, order)).data;
-    dispatch(updateOrder(resopnse));
+    const response = (await axios.put(`/api/orders/${order.id}`, order)).data;
+    dispatch(updateOrder(response));
   };
 };
 
 const deleteOrderThunk = order => {
-  return async dispatch =>{
+  return async dispatch => {
     const response = (await axios.delete(`api/orders/${order.id}`)).data;
-      dispatch(deleteOrder(response))
-  }
-}
+    dispatch(deleteOrder(response));
+  };
+};
 
 //LineItem thunk
-  const getCartThunk = () => {
-    return async dispatch => {
-      const response = (await axios.get('/api/carts')).data;
-      dispatch(getCart(response))
-    }
-  }
+const getCartThunk = () => {
+  return async dispatch => {
+    const response = (await axios.get('/api/carts')).data;
+    dispatch(getCart(response));
+  };
+};
 
-  const addCartItemThunk = (item) => {
-    return async dispatch => {
-      const response = (await axios.post('/api/carts'), item).data
-      dispatch(addCartItem(response))
-    }
-  }
+const addCartItemThunk = item => {
+  return async dispatch => {
+    const response = (await axios.post('/api/carts'), item).data;
+    console.log(item);
+    dispatch(addCartItem(response));
+  };
+};
 
-  const deleteCartItemThunk = item => {
-    return async dispatch => {
-      const response = (await axios.delete(`api/carts/${item.id}`)).data;
-      dispatch(deleteCartItem(response))
-    }
-  }
-
+const deleteCartItemThunk = item => {
+  return async dispatch => {
+    const response = (await axios.delete(`api/carts/${item.id}`)).data;
+    dispatch(deleteCartItem(response));
+  };
+};
 
 export {
   getProductsThunk,
   getUsersThunk,
   createUserThunk,
+  updateUserThunk,
+  deleteUserThunk,
   attemptLogin,
   attemptSession,
   attemptLogout,

@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { addCartItem, createOrderThunk } from '../redux/store';
+import { addCartItemThunk, createOrderThunk } from '../redux/store';
 
 class _Products extends Component {
+  async create(e, product) {
+    e.preventDefault();
+
+    const checkOrder = this.props.orders.filter(order => {
+      return this.props.cart.find(item => item.orderId == order.id);
+    });
+    if (!checkOrder.length) {
+      this.props.creteOrder({ userId: this.props.auth.id });
+    } else {
+      await this.props.toCreate({ productId: product.id, orderId: order.id });
+    }
+  }
   render() {
     return (
       <div>
@@ -13,7 +25,7 @@ class _Products extends Component {
               {product.name}
               <br />${product.price}
               <br />
-              <button onClick={() => this.props.toCreate(product)}>
+              <button onClick={e => this.create(e, product)}>
                 Add to Cart
               </button>
             </div>
@@ -24,14 +36,17 @@ class _Products extends Component {
   }
 }
 const Products = connect(
-  ({ products }) => {
+  ({ products, auth, cart, orders }) => {
     return {
-      products
+      products,
+      auth,
+      cart,
+      orders
     };
   },
   dispatch => {
     return {
-      toCreate: item => dispatch(addCartItem(item)),
+      toCreate: item => dispatch(addCartItemThunk(item)),
       creteOrder: order => dispatch(createOrderThunk(order))
     };
   }
