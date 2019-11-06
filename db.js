@@ -48,6 +48,10 @@ const Product = conn.define('product', {
     type: INTEGER,
     allowNull: false,
     defaultValue: 0
+  },
+  imageURL: {
+    type: STRING,
+    defaultValue: 'https://images.app.goo.gl/W6Ab8ExRsKz2YkZs9'
   }
 });
 
@@ -116,13 +120,13 @@ const syncAndSeed = async () => {
   );
 
   const products = [
-    { name: 'Hammer', stock: 200, price: 25.99 },
-    { name: 'Nails', stock: 200, price: 9.5 },
-    { name: 'Paint', stock: 200, price: 4.5 },
-    { name: 'Chair Set', stock: 200, price: 157.47 },
-    { name: 'Shovel', stock: 200, price: 15.0 },
-    { name: 'Lawn Mower', stock: 200, price: 300.25 },
-    { name: 'Wrench', stock: 200, price: 13.99 }
+    { name: 'Hammer', stock: 200, price: 25.99, imgURL: 'https://images.app.goo.gl/jHa3ixH7DNWjsMnt5' },
+    { name: 'Nails', stock: 200, price: 9.5, imageURL: 'https://images.app.goo.gl/6TPDuRjNPpNjVYXf7' },
+    { name: 'Paint', stock: 200, price: 4.5, imageURL: 'https://images.app.goo.gl/rfjpLmUwgighTizCA'},
+    { name: 'Chair Set', stock: 200, price: 157.47, imageURL: 'https://images.app.goo.gl/ZjBtgHc86Z5NUHSv9' },
+    { name: 'Shovel', stock: 200, price: 15.0, imageURL: 'https://images.app.goo.gl/ni9FMR6THARgiQyN8' },
+    { name: 'Lawn Mower', stock: 200, price: 300.25, imageURL: 'https://images.app.goo.gl/PsavuaRdjugE75vz7' },
+    { name: 'Wrench', stock: 200, price: 13.99, imageURL: 'https://images.app.goo.gl/pMNdfXeVTCNNRuvL9' }
   ];
   const [
     hammer,
