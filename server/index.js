@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const db = require('../db')
+const db = require('./db/database')
 const path = require('path');
 const routes = require('./routes');
 const port = process.env.PORT || 3000;
@@ -15,7 +15,7 @@ app.get('/', (req, res, next)=> {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-db.syncAndSeed()
+db.sync()
   .then(()=> {
     app.listen(port, console.log(`you are listening on port ${port}`))
   })
