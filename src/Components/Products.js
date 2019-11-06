@@ -12,7 +12,7 @@ class _Products extends Component {
         order => order.userId === this.props.auth.id
       );
       if (!checkOrder.length) {
-        this.props.creteOrder({ userId: this.props.auth.id });
+        this.props.createOrder({ userId: this.props.auth.id });
         const order = this.props.orders.filter(
           order => order.userId === this.props.auth.id
         );
@@ -63,7 +63,7 @@ const Products = connect(
   dispatch => {
     return {
       toCreate: item => dispatch(addCartItemThunk(item)),
-      creteOrder: order => dispatch(createOrderThunk(order))
+      createOrder: order => dispatch(createOrderThunk(order))
     };
   }
 )(_Products);

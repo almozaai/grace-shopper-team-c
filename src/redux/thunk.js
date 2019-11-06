@@ -7,6 +7,7 @@ import {
   getUsers,
   createUsers,
   deleteUser,
+  updateUser,
   getProducts,
   getOrders,
   createOrder,

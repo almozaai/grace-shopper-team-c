@@ -16,7 +16,7 @@ import {
   DELETE_ORDER
 } from './action.js';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const authenticateReducer = (state = {}, action) => {
   if (action.type === SET_AUTH) {
@@ -87,4 +87,4 @@ const reducer = combineReducers({
   orders: orderReducer
 });
 
-export { reducer, composeEnhancers };
+export { reducer, /*composeEnhancers*/ };

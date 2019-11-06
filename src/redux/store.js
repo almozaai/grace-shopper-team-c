@@ -17,12 +17,12 @@ import {
   deleteCartItemThunk
 } from './thunk.js';
 import { getCart, addCartItem, deleteCartItem } from './action.js';
-import { reducer, composeEnhancers } from './reducer.js';
+import { reducer/*, composeEnhancers*/ } from './reducer.js';
 
 const store = createStore(
   reducer,
-  //applyMiddleware(thunkMiddleware),
-  composeEnhancers(applyMiddleware(thunkMiddleware))
+  applyMiddleware(thunkMiddleware)
+  /*composeEnhancers(applyMiddleware(thunkMiddleware))*/
 );
 
 export default store;
