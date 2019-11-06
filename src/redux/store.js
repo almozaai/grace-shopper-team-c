@@ -8,9 +8,15 @@ import {
   attemptLogin,
   attemptSession,
   attemptLogout,
+  addCartItemThunk,
+  getOrdersThunk,
   createOrderThunk,
-  addCartItemThunk
+  updateOrderThunk,
+  deleteOrderThunk,
+  getCartThunk,
+  deleteCartItemThunk
 } from './thunk.js';
+
 import { getCart, addCartItem, deleteCartItem } from './action.js';
 import { reducer, composeEnhancers } from './reducer.js';
 
@@ -32,5 +38,10 @@ export {
   attemptSession,
   attemptLogout,
   addCartItemThunk,
-  createOrderThunk
+  createOrderThunk,
+  getOrdersThunk,
+  updateOrderThunk,
+  deleteOrderThunk,
+  getCartThunk,
+  deleteCartItemThunk
 };

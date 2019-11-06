@@ -7,6 +7,7 @@ import {
   getUsers,
   createUsers,
   deleteUser,
+  updateUser,
   getProducts,
   getOrders,
   createOrder,
@@ -110,7 +111,7 @@ const updateOrderThunk = order => {
 
 const deleteOrderThunk = order => {
   return async dispatch => {
-    const response = (await axios.delete(`api/orders/${order.id}`)).data;
+    const response = (await axios.delete(`/api/orders/${order.id}`)).data;
     dispatch(deleteOrder(response));
   };
 };
@@ -118,14 +119,14 @@ const deleteOrderThunk = order => {
 //LineItem thunk
 const getCartThunk = () => {
   return async dispatch => {
-    const response = (await axios.get('/api/carts')).data;
+    const response = (await axios.get('/api/linItems')).data;
     dispatch(getCart(response));
   };
 };
 
 const addCartItemThunk = item => {
   return async dispatch => {
-    const response = (await axios.post('/api/carts'), item).data;
+    const response = (await axios.post('/api/linItems', item)).data;
     console.log(item);
     dispatch(addCartItem(response));
   };
@@ -133,7 +134,7 @@ const addCartItemThunk = item => {
 
 const deleteCartItemThunk = item => {
   return async dispatch => {
-    const response = (await axios.delete(`api/carts/${item.id}`)).data;
+    const response = (await axios.delete(`/api/linItems/${item.id}`)).data;
     dispatch(deleteCartItem(response));
   };
 };

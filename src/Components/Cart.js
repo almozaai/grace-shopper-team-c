@@ -1,11 +1,26 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {deleteCartItem} from '../redux/store';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { deleteCartItem, addCartItemThunk, createOrderThunk } from '../redux/store';
 
-class Cart extends Component{
-  render(){
-    const {cart, destroy, cartTotal} = this.props
-    if (cart.length === 0) {
+class Cart extends Component {
+  render() {
+    const { cart, destroy, orders, auth, products } = this.props;
+    const orderAuth = orders.filter(order => order.userId === auth.id);
+    const userCart =
+      orderAuth.length !== 0
+        ? cart.filter(item => item.orderId === orderAuth[0].id)
+        : [];
+    const ownCart = userCart.map(item => ({
+      ...item,
+      product: products.find(product => product.id === item.productId)
+    }));
+    console.log(ownCart);
+    const cartTotal = ownCart
+      .map(item => item.product.price * 1)
+      .reduce((acc, curr) => acc + curr, 0)
+      .toFixed(2);
+
+    if (userCart.length === 0) {
       return (
         <div>
           <h2>Your Cart</h2>
@@ -13,42 +28,47 @@ class Cart extends Component{
         </div>
       );
     }
-    return(
+    return (
       <div>
         <h2>Your Cart</h2>
         <ul>
-          {
-            cart.map((item, idx)=>
+          {ownCart.map((item, idx) => (
             <li key={idx}>
-              {item.name} ${item.price}
-              <button onClick={()=> destroy(idx)}>Remove Item</button>
-            </li>)
-          }
+              {item.product.name} ${item.product.price}
+              <button onClick={() => destroy(idx)}>Remove Item</button>
+            </li>
+          ))}
         </ul>
         <h3>Subtotal ${cartTotal}</h3>
         <button>Submit Order</button>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = ({cart, products})=> {
+const mapStateToProps = ({ cart, products, auth, orders }) => {
   //cartTotal maps the prices of each item in a cart and totals those prices. Note: doesn't account for tax
-  const cartTotal = cart.map(item => item.price*1).reduce((acc, curr)=> acc + curr, 0).toFixed(2);
+
   return {
     cart,
     products,
-    cartTotal
+    auth,
+    orders
   };
-}
+};
 
-const mapDispatchToProps = (dispatch)=> {
-   return {
-     destroy: (idx)=>{
-       return dispatch(deleteCartItem(idx))
-     }
-  }
-}
+const mapDispatchToProps = dispatch => {
+  return {
+    destroy: idx => {
+      return {
+        destroy: idx => dispatch(deleteCartItem(idx)),
+        toCreate: item => dispatdh(addCartItemThunk(item)),
+        create: order => dispatch(createOrderThunk(order))
+    }
+  };
+};
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);
