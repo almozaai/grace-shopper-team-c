@@ -8,15 +8,22 @@ import {
   attemptLogin,
   attemptSession,
   attemptLogout,
+  addCartItemThunk,
   getOrdersThunk,
   createOrderThunk,
   updateOrderThunk,
-  deleteOrderThunk
+  deleteOrderThunk,
+  getCartThunk,
+  deleteCartItemThunk
 } from './thunk.js';
 import { getCart, addCartItem, deleteCartItem } from './action.js';
-import { reducer } from './reducer.js';
+import { reducer, composeEnhancers } from './reducer.js';
 
-const store = createStore(reducer, applyMiddleware(thunkMiddleware));
+const store = createStore(
+  reducer,
+  //applyMiddleware(thunkMiddleware),
+  composeEnhancers(applyMiddleware(thunkMiddleware))
+);
 
 export default store;
 export {
@@ -28,5 +35,12 @@ export {
   createUserThunk,
   attemptLogin,
   attemptSession,
-  attemptLogout
+  attemptLogout,
+  getOrdersThunk,
+  createOrderThunk,
+  updateOrderThunk,
+  deleteOrderThunk,
+  getCartThunk,
+  addCartItemThunk,
+  deleteCartItemThunk
 };
