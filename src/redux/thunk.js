@@ -119,14 +119,14 @@ const deleteOrderThunk = order => {
 //LineItem thunk
 const getCartThunk = () => {
   return async dispatch => {
-    const response = (await axios.get('/api/linItems')).data;
+    const response = (await axios.get('/api/lineItems')).data;
     dispatch(getCart(response));
   };
 };
 
 const addCartItemThunk = item => {
   return async dispatch => {
-    const response = (await axios.post('/api/linItems', item)).data;
+    const response = (await axios.post('/api/lineItems', item)).data;
     console.log(item);
     dispatch(addCartItem(response));
   };
@@ -134,7 +134,7 @@ const addCartItemThunk = item => {
 
 const deleteCartItemThunk = item => {
   return async dispatch => {
-    const response = (await axios.delete(`/api/linItems/${item.id}`)).data;
+    const response = (await axios.delete(`/api/lineItems/${item.id}`)).data;
     dispatch(deleteCartItem(response));
   };
 };

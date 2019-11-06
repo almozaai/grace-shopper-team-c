@@ -4,24 +4,23 @@ import { connect } from 'react-redux';
 import { addCartItemThunk, createOrderThunk } from '../redux/store';
 
 class _Products extends Component {
-  async create(e, product) {
+  create(e, product) {
     e.preventDefault();
-    console.log(this.props.cart, this.props.orders);
     if (this.props.auth) {
       const checkOrder = this.props.orders.filter(
         order => order.userId === this.props.auth.id
       );
-      console.log('checkOrder', checkOrder);
       if (!checkOrder.length) {
-        await this.props.creteOrder({ userId: this.props.auth.id });
+        this.props.creteOrder({ userId: this.props.auth.id });
         const order = this.props.orders.filter(
           order => order.userId === this.props.auth.id
         );
-        console.log(order[0].id);
-        await this.props.toCreate({
-          productId: product.id,
-          orderId: order[0].id
-        });
+        if (!order.length) {
+          this.props.toCreate({
+            productId: product.id,
+            orderId: order[0].id
+          });
+        }
       } else {
         console.log(
           'with item',
@@ -30,7 +29,7 @@ class _Products extends Component {
           )[0].id,
           product.id
         );
-        await this.props.toCreate({
+        this.props.toCreate({
           productId: product.id,
           orderId: this.props.orders.filter(
             order => order.userId === this.props.auth.id
@@ -42,9 +41,9 @@ class _Products extends Component {
   render() {
     return (
       <div>
-        <div className="ordering">
+        <div className='ordering'>
           {this.props.products.map(product => (
-            <div key={product.id} className="border">
+            <div key={product.id} className='border'>
               {product.name}
               <br />${product.price}
               <br />

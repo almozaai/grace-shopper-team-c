@@ -34,14 +34,14 @@ class _App extends Component {
     return (
       <HashRouter>
         <Route component={Nav} />
-        <Route path="/" component={Home} exact />
-        <Route path="/users" component={Users} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/profile" component={UserProfile} />
-        <Route path="/settings/profile" component={UpdateUserForm} exact />
-        <Route path="/settings/deactivate" component={DeleteUser} exact />
-        <Route path="/products" component={Products} />
-        <Route path="/cart" component={Cart} />
+        <Route path='/' component={Home} exact />
+        <Route path='/users' component={Users} />
+        <Route path='/signup' component={SignUp} />
+        <Route path='/profile' component={UserProfile} />
+        <Route path='/settings/profile' component={UpdateUserForm} exact />
+        <Route path='/settings/deactivate' component={DeleteUser} exact />
+        <Route path='/products' component={Products} />
+        <Route path='/cart' component={Cart} />
       </HashRouter>
     );
   }
