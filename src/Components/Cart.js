@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteCartItem, addCartItemThunk, createOrderThunk } from '../redux/store';
+import {
+  deleteCartItem,
+  addCartItemThunk,
+  createOrderThunk
+} from '../redux/store';
 
 class Cart extends Component {
   render() {
@@ -59,12 +63,9 @@ const mapStateToProps = ({ cart, products, auth, orders }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    destroy: idx => {
-      return {
-        destroy: idx => dispatch(deleteCartItem(idx)),
-        toCreate: item => dispatdh(addCartItemThunk(item)),
-        create: order => dispatch(createOrderThunk(order))
-    }
+    destroy: idx => dispatch(deleteCartItem(idx)),
+    toCreate: item => dispatdh(addCartItemThunk(item)),
+    create: order => dispatch(createOrderThunk(order))
   };
 };
 
