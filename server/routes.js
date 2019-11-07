@@ -36,7 +36,9 @@ router.post('/api/users', (req, res, next) => {
 });
 // Update a User
 router.put('/api/users/:id', async (req, res, next) => {
-  const user = await User.findByPk(req.session.user.id);
+  const user = await User.findByPk(req.session.user.id, {
+    include: [{ model: Order, include: [LineItem] }]
+  });
 
   user
     .update({
