@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
-const { User, Product, Order, LineItem } = db.models;
+const { User, Product, Order, LineItem } = require('./db');
 
 router.use(express.json());
+
+router.use(require('express-session')({
+  secret: process.env.SECRET,
+  saveUninitialized: true,
+  resave: false,
+}));
 
 //GET Route
 router.get('/api/users', (req, res, next) => {
