@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { UUID, UUIDV4, INTEGER, DataTypes,STRING } = Sequelize;
+const { UUID, UUIDV4, INTEGER, DataTypes,STRING, TEXT } = Sequelize;
 const db = require('../database');
 
 const Product = db.define('product', {
@@ -22,7 +22,12 @@ const Product = db.define('product', {
     type: INTEGER,
     allowNull: false,
     defaultValue: 0
-  }
+  },
+  imageURL: {
+    type: STRING,
+    defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'
+  },
+  description: TEXT
 });
 
 module.exports = Product;

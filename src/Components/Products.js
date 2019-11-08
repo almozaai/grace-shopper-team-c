@@ -39,6 +39,9 @@ class _Products extends Component {
           {this.props.products.map(product => (
             <div key={product.id} className='border'>
               {product.name}
+              <img src={product.imageURL}
+              style={{width: '100%', height: 200 }}
+              />
               <br />${product.price}
               <br />
               <button onClick={e => this.create(e, product)}>
